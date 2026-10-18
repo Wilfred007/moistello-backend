@@ -4,6 +4,7 @@ linters:
     - gofmt
     - ineffassign
     - forbidigo
+    - errcheck
 
 linters-settings:
   forbidigo:
@@ -31,3 +32,8 @@ issues:
     - path: cmd/migrate/
       linters:
         - forbidigo
+    # errcheck is rolled out package by package; cmd/indexer is clean and
+    # must stay that way. Extend this pattern as other packages are fixed.
+    - path-except: ^cmd/indexer/
+      linters:
+        - errcheck
